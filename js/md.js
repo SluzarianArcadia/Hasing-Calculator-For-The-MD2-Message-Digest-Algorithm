@@ -1,11 +1,13 @@
 
 var plaintext = document.getElementById('plaintext');
-var numberOfColumns = 16;
+var blockSize = 16;
 var previousChecksum = 0;
 var asciiOutputWithPadding = [];
 var tableObject = [];
 var checksumArray = [];
-var md_digest = 000000000000000000000000000000000000000000000000;
+var md_digest = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
+var numberOfProcessingRounds = 18;
+var finalMessage = [];
 
 document.addEventListener("DOMContentLoaded", function() {
   wait(200);
@@ -21,17 +23,17 @@ function logKey() {
 
   var number_of_rows_Param = returnNumberOfRows();
   asciiOutputWithPadding   = return_ascii_padded_output();
-  populateTable(tableObject, number_of_rows_Param, numberOfColumns, asciiOutputWithPadding);
+  populateTable(tableObject, number_of_rows_Param, blockSize, asciiOutputWithPadding);
 
   var checksumoutput = createCheckSumRow();
-  // var finalblock = combinechecksumPaddingAscii(checksumoutput, asciiOutputWithPadding);
+  finalMessage = combinechecksumPaddingAscii(checksumoutput, asciiOutputWithPadding);
 
   renderOutput("output", document.getElementById("plaintext").value);
   renderOutput("ascii_output", convertToAscii());
   renderOutput("ascii_output_with_pad",asciiOutputWithPadding);
   renderOutput("checkSumRow", checksumoutput);
   renderOutput("checkSumFinalRow", checksumoutput.slice(-16));
-  renderOutput("finalBlock", combinechecksumPaddingAscii(checksumoutput, asciiOutputWithPadding));
+  renderOutput("finalBlock", finalMessage);
 }
 
 function renderOutput(idtag, inputText){
@@ -54,19 +56,19 @@ function convertToAscii(asciiNumberArray = [], returnValued = []) {
 
 
 function returnNumberOfRows(stringarray = document.getElementById("plaintext").value){
-  var result = stringarray.length / numberOfColumns;
+  var result = stringarray.length / blockSize;
   result = Math.ceil(result);
   return result;
 }
 
 function numberOfPaddedValues(stringarray = document.getElementById("plaintext").value){
-  nonPaddedAmount = stringarray.length % numberOfColumns
-  amountOfPaddedNumbers = (numberOfColumns - nonPaddedAmount);
+  nonPaddedAmount = stringarray.length % blockSize
+  amountOfPaddedNumbers = (blockSize - nonPaddedAmount);
   return amountOfPaddedNumbers;
 }
 
 function return_ascii_padded_output(numberOfPads = numberOfPaddedValues(),asciiText = convertToAscii()){
-  if (numberOfPads == numberOfColumns){
+  if (numberOfPads == blockSize){
     return asciiText;
   }1
   for (var i = 1; i < numberOfPads + 1;  ++i){
@@ -145,13 +147,10 @@ function findPiIndex (lookUpNumber){
 function calculateChecksum(previousChecksum, currentAsciiNumber, sameBlockPositionLastChecksum){
   firstXorResult = findXor(previousChecksum, currentAsciiNumber);
   lookUpPiTableResult = findPiIndex(firstXorResult);
-
-  console.log(sameBlockPositionLastChecksum);
-
-  if (checksumArray.length >= 16){
-    secondXorResult = findXor(lookUpPiTableResult,sameBlockPositionLastChecksum);
-    return secondXorResult;
-  }
+    if (checksumArray.length >= 16){
+      secondXorResult = findXor(lookUpPiTableResult,sameBlockPositionLastChecksum);
+      return secondXorResult;
+    }
   return lookUpPiTableResult;
 }
 
@@ -166,4 +165,24 @@ function createCheckSumRow(){
         counter++;
     }
   return checksumArray;
+}
+
+
+function hashingProcessing(){
+  var md_digest = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
+  for (let i = 0; i <  (finalMessage.length / blockSize); i++) {
+    for (let j = 0; j < blockSize; j++) {
+      md_digest[blockSize + j] = finalMessage[i * blockSize + j];
+      md_digest[2 * blockSize + j] = md_digest[blockSize +j] ^ md_digest[j];      
+    }
+  }
+
+  previous_hashbyte = 0;
+  for (let k = 0; k < numberOfProcessingRounds; k++) {
+    for (let p = 0; p < blockSize; p++) {      
+      md_digest[p] = previous_hashbyte = md_digest[p] ^ findPiIndex(previous_hashbyte);
+      previous_hashbyte = (previous_hashbyte + k) % decimalsOfPi.length;
+    }
+  }
+  return md_digest;
 }
