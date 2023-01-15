@@ -10,6 +10,7 @@ var numberOfProcessingRounds = 18;
 var checkSumPaddingMessage = [];
 var md_digest = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
 var counter = 0;
+var paddingStyle;
 
 document.addEventListener("DOMContentLoaded", function() {
   wait(200);
@@ -41,6 +42,7 @@ function logKey() {
   renderOutput("finalBlock", checkSumPaddingMessage);
   renderOutput("allHashedOutput",   md_digest.join("").toString());
   renderOutput("finalHashedOutput", md_digest.join("").toString().slice(0,32));
+
 
   md_digest = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
   checkSumPaddingMessage = [];
