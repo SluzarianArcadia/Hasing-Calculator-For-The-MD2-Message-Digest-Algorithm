@@ -10,13 +10,13 @@ var numberOfProcessingRounds = 18;
 var checkSumPaddingMessage = [];
 var md_digest = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
 var counter = 0;
-var paddingStyle;
 
 document.addEventListener("DOMContentLoaded", function() {
   wait(200);
   tableObject = document.getElementById("startTable").appendChild(populateTable(null, null, 16, null))
   wait(200);
   logKey();
+  selectPaddingTableCells();
 });
 
 plaintext.addEventListener('keyup', logKey);
@@ -34,7 +34,6 @@ function logKey() {
   md_digest = hashingProcessing(checkSumPaddingMessage,md_digest);
   md_digest = decodeAsciiDecimalToArray(md_digest);
 
-  renderOutput("output", document.getElementById("plaintext").value);
   renderOutput("ascii_output", convertToAscii());
   renderOutput("ascii_output_with_pad",asciiOutputWithPadding);
   renderOutput("checkSumRow", checksum);
@@ -97,8 +96,7 @@ function populateTable(table ,rows, cells, content) {
   var row = document.createElement('tr');
   if (!table) {table = document.createElement('table');
    var thead = document.createElement('thead');
-   table.appendChild(thead);
-
+  table.appendChild(thead);
   thead.appendChild(row);
   }
 
