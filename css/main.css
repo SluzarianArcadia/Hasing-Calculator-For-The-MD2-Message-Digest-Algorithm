@@ -330,8 +330,3 @@ table thead {
 
 
 #startTable > table > tr:last-child { background:#00780c; }
-
-
-#idRow2 :nth-last-child(-n+3) {
-  background:#fff700
-}

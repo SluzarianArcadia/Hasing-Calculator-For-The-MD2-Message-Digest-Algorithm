@@ -1,3 +1,4 @@
+
 var wait = (ms) => {
     const start = Date.now();
     let now = start;
@@ -5,9 +6,3 @@ var wait = (ms) => {
       now = Date.now();
     }
 }
-
-
-
-
-paddingStyle = selectPaddingTableCells()
-
