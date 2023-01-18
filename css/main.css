@@ -286,7 +286,9 @@ textarea {
 
   }
 
-
+  div {
+    margin: 10px;
+  }
   
 table {
   width: 100%;
@@ -302,6 +304,7 @@ table td, table th {
   border-color: #7EA8F8;
   border-style: solid;
   padding: 0px;
+  text-align: center;
 }
 
 table thead {
@@ -329,4 +332,123 @@ table thead {
 }
 
 
-#startTable > table > tr:last-child { background:#00780c; }
+#startTable > table > tr:last-child { 
+  background:#005108; 
+  color: white;
+}
+
+
+/* Diagonal stacked paper effect */
+.paper {
+  background-color: #fff;
+  /* Need position to allow stacking of pseudo-elements */
+  position: relative;
+  /* Padding for demo purposes */
+  padding: 30px;
+  margin-top: 25px;
+}
+
+.paper,
+.paper::before,
+.paper::after {
+  /* Add shadow to distinguish sheets from one another */
+  box-shadow: 2px 1px 1px rgba(0,0,0,0.15);
+}
+
+.paper::before,
+.paper::after {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-color: #eee;
+}
+
+/* Second sheet of paper */
+.paper::before {
+  left: 4px;
+  top: 4px;
+  z-index: -1;
+}
+
+/* Third sheet of paper */
+.paper::after {
+  left: 8px;
+  top: 9px;
+  z-index: -2;
+}
+
+
+#button1 {
+  visibility: visible;
+
+}
+
+#button2 {
+  visibility: hidden;
+}
+
+/* #firstInstructions {
+  visibility: visible;
+  -webkit-animation: fadeIn 1s;
+  animation: fadeIn 1s;
+} */
+
+
+#firstInstructions {
+  transition:  all 1s ease-out;
+  opacity: 0;
+  height: 0px;
+  overflow: hidden;
+}
+#firstInstructions.active {
+  transition: all 1s ease-in;
+  opacity: 1;
+  height: 900px;
+}
+
+
+
+
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Koulen&family=Lato&family=Nunito&family=Playfair+Display:ital@1&family=Prata&family=Raleway:ital,wght@1,100&family=Roboto&family=Roboto+Condensed&family=Teko&display=swap'); 
+.btn{
+font-family: Roboto, sans-serif;
+font-weight: 436;
+font-size: 18px;
+color: #fff;
+background-color: #979797;
+padding: 10px 30px;
+border: solid #0066cc00 2px;
+box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+border-radius: 11px;
+transition : 677ms;
+transform: translateY(0);
+display: flex;
+flex-direction: row;
+align-items: center;
+cursor: pointer;
+position: center;
+
+}
+.btn:hover{
+transition : 677ms;
+padding: 10px 83px;
+transform : translateY(-5px);
+background-color: #fff;
+color: #000000;
+border: solid 2px #000000;
+}
+
+code {
+  color: #c0392b;
+  font-family: Inconsolata, "Andale Mono", Andale, monowidth;
+  background-color: #ecf0f1;
+  border: 1px solid #dfdfdf;
+  border-radius: 2px;
+}
+
+.backgroundCode {
+  background-color: #929292;
+  border: 1px solid #dfdfdf;
+  border-radius: 2px;
+}

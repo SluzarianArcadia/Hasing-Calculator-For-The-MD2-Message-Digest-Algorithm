@@ -23,23 +23,59 @@
 </head>
 
 <body>
+  <h1>MD2 Hash Tutorial Website</h1>
 
-  <!-- Add your site or application content here -->
-  <h1>Hash It All</h1>
+<div class="paper">
+  <button id="button1" class="btn"onclick="addClass()"> Click Me To Read Instructions <img src="https://www.htmlcssbuttongenerator.com/iconExample-plus-square-multiple-lined.svg" style="width:19px; margin-left:21px; margin-right:0px; flex-direction: row;"></button> 
+  <div id="firstInstructions">
+    <p>Welcome to my tutorial calculator for the MD2  hashing algorithm. MD2 is an older hasing algorithm and a nice starting place to learn how hashing works. The simplest explanation of hashing is that you take a string of characters and move it through an algorithm to get another set of characters.</p>
+    <h2>Why Use A Hashing Algorithm</h2>
+    <ul>
+      <li>Data Structure to Quickly Look Data Up</li>
+      <li>Verifying the Integrity of Messages and Files</li>
+      <li>Secure Password Storage and Verification</li>
+      <li>Storing Passwords as Hash Digests Instead of Plaintext</li>
+      <li>Signature Generation and Verification</li>
+      <li>Proof-of-work</li>
+    </ul>
 
-  <div class="inputfields">
+  <p>More specifically hashing algorithms can take any data of any size (even "") and turn it into a fixed size of values. That could be your password, a whole text of a book, the zero and ones of a file, and any picture.</p>
+  <p>Hashing algorithms are a one way process unlike key algorithms. It's mathematical unlikely a hacker will form a reverse algorithm to turn all the hashes back to plain-text. This would mean the algorithm has been cracked (which this one has been so please don’t use it!).</p>
+  <p>I used Javascript to turn this MD2 Hash into a interactive calculator. This is to lift the mystery of these types of hashing and reveal the gears underneath the hood.</p>
+
+    <h2>The initial M2 standard : RFC 1319</h2>
+    <p>The original paper that debuted the algorithm was the RFC 1319. RFC stands for request for comments.</p>
+    <a href="https://www.rfc-editor.org/rfc/rfc1319">Link To Original RFC</a>
+    <p>The original had errors so they fixed the erros with an update .</p>
+    <a href="https://www.rfc-editor.org/rfc/inline-errata/rfc1319.html">Link To Corrected RFC</a>
+    <br>
+    <p>The Steps Outlined are as follows</p>
+    <ol>
+      <li>Padding the message</li>
+      <li>Append checksum</li>
+      <li>Initialize digest</li>
+      <li>Process the message in 16-bytes blocks</li>
+      <li>Output</li>
+    </ol>
+    <button id="button2">Click Me To Hide Instructions</button>
+  </div>
+</div>
+
+  
+  <div class="inputfield">
   <h2>Insert Plaintext to Hash</h2>
   <input id="plaintext" value="Type Here">
   </div>
 
-  <h3>Ascii Representation of Plaintext</h3>
-  <textarea id="ascii_output" class="boxsizingBorder"></textarea>
+  <h3>Ascii Decimal Representation of Plaintext</h3>
+  <div><textarea id="ascii_output" class="boxsizingBorder"></textarea>
 
-  <h3>Ascii Representation of Plaintext with Padding</h3>
+  <h3>Ascii Decimal Representation of Plaintext and Padding</h3>
   <textarea id="ascii_output_with_pad" class="boxsizingBorder"></textarea>
 
 
-<div id="startTable"></div>
+  <h3>Table of 16 byte blocks sent to be processed into a MD2 Hash</h3>
+  <div id="startTable"></div>
 
 
 <h3>Checksum calculation needs us to meet with the substitution table of the MD2 algorithm. It consist in a table of 256 elements, which has been chosen to be decimals of PI.</h3>
@@ -66,7 +102,7 @@
 
   
   <h3>All checksumvalues</h3>
-  <textarea id="checkSumRow" class="boxsizingBorder"></textarea>
+  <textarea id="allCheckSumCalculated" class="boxsizingBorder"></textarea>
 
   <h3>Last Checksum Values to Use</h3>
   <textarea id="checkSumFinalRow" class="boxsizingBorder"></textarea>
@@ -75,7 +111,7 @@
   <h3>Ascii with padding and checksum output</h3>
   <textarea id="finalBlock" class="boxsizingBorder"></textarea>
 
-  <h3>All Hashes Calculated</h3>
+  <h3>Full Length String of Hash</h3>
   <textarea id="allHashedOutput" class="boxsizingBorder"></textarea>
 
   <h3>MD2 Hash</h3>
@@ -88,6 +124,8 @@
   <script src="js/main.js"></script>
   <script src="js/md.js"></script>
   <script src="js/cssPadding.js"></script>
+
+  
 
 
 </body>

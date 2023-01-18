@@ -9,14 +9,13 @@ var checksumArray = [];
 var numberOfProcessingRounds = 18;
 var checkSumPaddingMessage = [];
 var md_digest = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
-var counter = 0;
+var allCheckSumCalculated = [];
+
 
 document.addEventListener("DOMContentLoaded", function() {
   wait(200);
-  tableObject = document.getElementById("startTable").appendChild(populateTable(null, null, 16, null))
-  wait(200);
-  logKey();
-  selectPaddingTableCells();
+  tableObject = document.getElementById("startTable").appendChild(populateTable(null, null, 16, null));wait(200);
+  logKey(); logKeyCSS();
 });
 
 plaintext.addEventListener('keyup', logKey);
@@ -36,7 +35,7 @@ function logKey() {
 
   renderOutput("ascii_output", convertToAscii());
   renderOutput("ascii_output_with_pad",asciiOutputWithPadding);
-  renderOutput("checkSumRow", checksum);
+  renderOutput("allCheckSumCalculated", allCheckSumCalculated);
   renderOutput("checkSumFinalRow", checksum.slice(-16));
   renderOutput("finalBlock", checkSumPaddingMessage);
   renderOutput("allHashedOutput",   md_digest.join("").toString());
@@ -44,23 +43,20 @@ function logKey() {
 
 
   md_digest = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
-  checkSumPaddingMessage = [];
+  // checkSumPaddingMessage = [];
 }
 
 function renderOutput(idtag, inputText){
   document.getElementById(idtag).value = inputText;
 }
 
-function convertToAscii(asciiNumberArray = [], returnValued = []) {
+function convertToAscii() {
+  asciiNumberArray = [];
   var x = document.getElementById("plaintext").value;
-
   x.split("").forEach(function(char) {
     asciiNumberArray.push(char.charCodeAt());
   });
-
-  returnValued = asciiNumberArray;
-  asciiNumberArray = [];
-  return returnValued;
+  return asciiNumberArray;
 }
 
 
@@ -135,12 +131,14 @@ function getXOR (previousChecksum, currentAsciiNumber){
 }
 
 function getChecksum (message){
+  allCheckSumCalculated = [];
   var checksum = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
   previous_checkbyte = 0;
   for (let i = 0; i < message.length / blockSize; i++) {
     for (let j = 0; j < blockSize; j++) {
       byteValue = message[i * blockSize + j];
       previous_checkbyte = checksum[j] = getXOR(checksum[j], decimalsOfPi[getXOR(byteValue , previous_checkbyte)] );
+      allCheckSumCalculated[j + (16 * i)] = previous_checkbyte;
     }
   }
   return checksum
