@@ -1,0 +1,1 @@
+Project based website to build up my profile and learn in depth how a hashing algorithm works albeit an outdated one.
