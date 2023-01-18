@@ -428,15 +428,21 @@ flex-direction: row;
 align-items: center;
 cursor: pointer;
 position: center;
+transition: all 1s ease-in;
+position: absolute;
+top: 50%;
+left: 50%;
+-ms-transform: translate(-50%, -50%);
+transform: translate(-50%, -50%);
 
 }
 .btn:hover{
 transition : 677ms;
-padding: 10px 83px;
-transform : translateY(-5px);
+transform : translateY(-25px);
 background-color: #fff;
 color: #000000;
 border: solid 2px #000000;
+transform: translate(-50%,-70%);
 }
 
 code {
@@ -451,4 +457,11 @@ code {
   background-color: #929292;
   border: 1px solid #dfdfdf;
   border-radius: 2px;
+}
+
+.activeBtn {
+position: absolute;
+top: 90%;
+left: 71%;
+transition: all 1s ease-in;
 }
