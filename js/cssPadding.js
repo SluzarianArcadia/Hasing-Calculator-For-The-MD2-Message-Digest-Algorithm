@@ -26,7 +26,3 @@ function getRowOfElementsToPad (numberOfRows, numberOfCells){
         return document.getElementById("idRow" + (numberOfRows - 2)).children;
     }
 }
-
-function getRowID4Padding(spacer){
-    return ("idRow" + (returnNumberOfRows() + spacer))
-}
