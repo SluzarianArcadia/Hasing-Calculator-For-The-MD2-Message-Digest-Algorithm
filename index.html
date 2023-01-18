@@ -25,7 +25,7 @@
   <h1>MD2 Hash Tutorial Website</h1>
 
 <div class="paper">
-  <button id="button1" class="btn"onclick="addClass()"> Click Me To Read Instructions <img src="https://www.htmlcssbuttongenerator.com/iconExample-plus-square-multiple-lined.svg" style="width:19px; margin-left:21px; margin-right:0px; flex-direction: row;"></button> 
+  <button id="button1" class="btn" onclick="addClass('button1', 'firstInstructions')"> Click Me To Read Instructions <img src="https://www.htmlcssbuttongenerator.com/iconExample-plus-square-multiple-lined.svg" style="width:19px; margin-left:21px; margin-right:0px; flex-direction: row;"></button> 
   <div id="firstInstructions">
     <p>Welcome to my tutorial calculator for the MD2  hashing algorithm. MD2 is an older hasing algorithm and a nice starting place to learn how hashing works. The simplest explanation of hashing is that you take a string of characters and move it through an algorithm to get another set of characters.</p>
     <h2>Why Use A Hashing Algorithm</h2>
@@ -56,7 +56,6 @@
       <li>Process the message in 16-bytes blocks</li>
       <li>Output</li>
     </ol>
-    <button id="button2">Click Me To Hide Instructions</button>
   </div>
 </div>
 
@@ -66,8 +65,8 @@
   <input id="plaintext" value="Type Here">
   </div>
 
-  <h3>Ascii Decimal Representation of Plaintext</h3>
   <div class="left">
+    <h3>Ascii Decimal Representation of Plaintext</h3>
     <textarea id="ascii_output" class="boxsizingBorder"></textarea>  
   </div>
   <div class="right">
@@ -76,9 +75,9 @@
 
 
 
-  <h3>Ascii Decimal Representation of Plaintext and Padding</h3>
 
   <div class="left">
+    <h3>Ascii Decimal Representation of Plaintext and Padding</h3>
     <textarea id="ascii_output_with_pad" class="boxsizingBorder"></textarea>
   </div>
   <div class="right">
@@ -109,51 +108,102 @@
       242, 239, 183, 14, 102, 88, 208, 228, 166, 119, 114, 248, 235, 117, 75, 10,
       49, 68, 80, 180, 143, 237, 31, 26, 219, 153, 141, 51, 159, 17, 131, 20]</code>
 
+      <p>Before we can understand the checksum method we need to know "what exlusive or" is or "XOR". It is a logical operation that is true if and only if it's arguments differ. </p>
+      <table>
+        <thead>
+          <tr>
+            <th>a</th>
+            <th>b</th>
+            <th>a XOR b</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>0</td>
+            <td>0</td>
+            <td>0</td>
+          </tr>
+          <tr>
+            <td>0</td>
+            <td>1</td>
+            <td>1</td>
+          </tr>
+          <tr>
+            <td>1</td>
+            <td>0</td>
+            <td>1</td>
+          </tr>
+          <tr>
+            <td>1</td>
+            <td>1</td>
+            <td>0</td>
+          </tr>
+        </tbody>
+      </table>
+      <p>Specifically we are taking the binary of our ascii bytes and comparing them against each other to produce the XORed result.</p>
+      <p>This is a signed binary system so ignore the leading 0.  Below you can test out the XOR function and what it produces. We will use the XOR function four different places in our code to get our final digest. XOR functions are used a lot in hashing due to it's speed and perfect balance in producing a more random result (if the input is random).</p>
+
+      <input id="xorInput1" value ="3"/><span> ^ </span> 
+      <input id="xorInput2" value ="5"/><span> = </span> 
+      <input id="xorInput3"/>
+      <button onClick="convert();">Convert!</button> <br>
+
+      <input id="xorOutput1" /><span> ^ </span> 
+      <input id="xorOutput2" /><span> = </span>
+      <input id="xorOutput3"/>
+
+
+      <p> You can see the function below which passes over our 16 byte blocks deriving a 16 byte checksum.
+        We first XOR the current byte value and the previous byte value(if none it is initially zero).
+        This number will then be used against the Sbox index to find a number there. 
+        The indexed number will then be XORed against the last checksum number in the same 16 byte block position that we are currently on this result replaces the previous checksum.
+      </p>
+      <h3>
+        Pseudocode <br>   XOR(LastBlockSamePositionCheckSumByte,  SboxLookUp[  XOR(SameBlockPreviousCheckSumByte, ASCIIByte)  ])
+      </h3>
+  </div>
+
+  <div class="left">
+    <h3>All checksumvalues</h3>
+    <textarea id="allCheckSumCalculated" class="boxsizingBorder"></textarea>
+  
+    <h3>Last Checksum Values For Processing</h3>
+    <textarea id="checkSumFinalRow" class="boxsizingBorder"></textarea>
+  </div>
+
+  <div class="right">
+    <script src="https://gist.github.com/SluzarianArcadia/76920de8efd8e98f568e959a0380fe9c.js"></script>
   </div>
 
 
-  <h3>Table of 16 byte blocks sent to be processed into a MD2 Hash</h3>
-  <div id="startTable"></div>
-
-
-<h3>Checksum calculation needs us to meet with the substitution table of the MD2 algorithm. It consist in a table of 256 elements, which has been chosen to be decimals of PI.</h3>
-<p>S = [
-  41, 46, 67, 201, 162, 216, 124, 1, 61, 54, 84, 161, 236, 240, 6, 19,
-  98, 167, 5, 243, 192, 199, 115, 140, 152, 147, 43, 217, 188, 76, 130, 202,
-  30, 155, 87, 60, 253, 212, 224, 22, 103, 66, 111, 24, 138, 23, 229, 18,
-  190, 78, 196, 214, 218, 158, 222, 73, 160, 251, 245, 142, 187, 47, 238, 122,
-  169, 104, 121, 145, 21, 178, 7, 63, 148, 194, 16, 137, 11, 34, 95, 33,
-  128, 127, 93, 154, 90, 144, 50, 39, 53, 62, 204, 231, 191, 247, 151, 3,
-  255, 25, 48, 179, 72, 165, 181, 209, 215, 94, 146, 42, 172, 86, 170, 198,
-  79, 184, 56, 210, 150, 164, 125, 182, 118, 252, 107, 226, 156, 116, 4, 241,
-  69, 157, 112, 89, 100, 113, 135, 32, 134, 91, 207, 101, 230, 45, 168, 2,
-  27, 96, 37, 173, 174, 176, 185, 246, 28, 70, 97, 105, 52, 64, 126, 15,
-  85, 71, 163, 35, 221, 81, 175, 58, 195, 92, 249, 206, 186, 197, 234, 38,
-  44, 83, 13, 110, 133, 40, 132, 9, 211, 223, 205, 244, 65, 129, 77, 82,
-  106, 220, 55, 200, 108, 193, 171, 250, 36, 225, 123, 8, 12, 189, 177, 74,
-  120, 136, 149, 139, 227, 99, 232, 109, 233, 203, 213, 254, 59, 0, 29, 57,
-  242, 239, 183, 14, 102, 88, 208, 228, 166, 119, 114, 248, 235, 117, 75, 10,
-  49, 68, 80, 180, 143, 237, 31, 26, 219, 153, 141, 51, 159, 17, 131, 20]</p>
-
-
-
-
-  
-  <h3>All checksumvalues</h3>
-  <textarea id="allCheckSumCalculated" class="boxsizingBorder"></textarea>
-
-  <h3>Last Checksum Values to Use</h3>
-  <textarea id="checkSumFinalRow" class="boxsizingBorder"></textarea>
 
 
   <h3>Ascii with padding and checksum output</h3>
-  <textarea id="finalBlock" class="boxsizingBorder"></textarea>
+  <textarea id="finalBlockBeforeProcessing" class="boxsizingBorder"></textarea>
 
-  <h3>Full Length String of Hash</h3>
-  <textarea id="allHashedOutput" class="boxsizingBorder"></textarea>
+  <h3>Table of our 16 byte blocks that will be sent to be processed into a MD2 Hash</h3>
+  <div id="messageBeforeProcessing"></div>
 
-  <h3>MD2 Hash</h3>
-  <textarea id="finalHashedOutput" class="boxsizingBorder"></textarea>
+  
+
+  <div class="left">
+    <h3>Full Length String of Hash</h3>
+    <textarea id="allHashedOutput" class="boxsizingBorder"></textarea>
+    <h3>MD2 Hash</h3>
+    <textarea id="finalHashedOutput" class="boxsizingBorder"></textarea>
+  </div>
+  <div class="right">
+    <script src="https://gist.github.com/SluzarianArcadia/f5e31045a2afcd72bf944bc122e39f28.js"></script>
+  </div>
+
+  <div class="paper">
+    <h2>What is Happening in This Hashing Function</h2>
+    <p></p>
+  </div>
+
+ 
+
+
 
   
   <script src="js/vendor/modernizr-3.11.2.min.js"></script>
