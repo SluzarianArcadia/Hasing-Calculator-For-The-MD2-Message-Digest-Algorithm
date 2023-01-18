@@ -23,7 +23,7 @@ function selectPaddingTableCells(selectedPaddingColor){
 
 function getRowOfElementsToPad (numberOfRows, numberOfCells){
     if (numberOfCells != 16){
-        return document.getElementById(paddingIDROW = "idRow" + (numberOfRows - 2)).children;
+        return document.getElementById("idRow" + (numberOfRows - 2)).children;
     }
 }
 
