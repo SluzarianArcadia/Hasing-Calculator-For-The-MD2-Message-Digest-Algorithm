@@ -8,7 +8,7 @@ var tableObject = [];
 var checksumArray = [];
 var numberOfProcessingRounds = 18;
 var checkSumPaddingMessage = [];
-var md_digest = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
+var MD_Digest = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
 var allCheckSumCalculated = [];
 
 
@@ -23,30 +23,30 @@ plaintext.addEventListener('keyup', logKey);
 function logKey() {
   wait(50);
 
-  var number_of_rows_Param = returnNumberOfRows();
-  asciiOutputWithPadding   = return_ascii_padded_output();
+  var numberOfRowsParam = returnNumberOfRows();
+  asciiOutputWithPadding   = getASCII_PaddedOutput();
   checksum = getChecksum(asciiOutputWithPadding);
   checkSumPaddingMessage = combinechecksumPaddingAscii(checksum, asciiOutputWithPadding);
 
-  populateTable(tableObject, number_of_rows_Param, blockSize, checkSumPaddingMessage);
+  populateTable(tableObject, numberOfRowsParam, blockSize, checkSumPaddingMessage);
 
-  md_digest = hashingProcessing(checkSumPaddingMessage,md_digest);
-  md_digest = decodeAsciiDecimalToArray(md_digest);
+  MD_Digest = hashingProcessing(checkSumPaddingMessage,MD_Digest);
+  MD_Digest = decodeAsciiDecimalToArray(MD_Digest);
 
-  renderOutput("ascii_output", convertToAscii());
-  renderOutput("ascii_output_with_pad",asciiOutputWithPadding);
-  renderOutput("allCheckSumCalculated", allCheckSumCalculated);
-  renderOutput("checkSumFinalRow", checksum.slice(-16));
-  renderOutput("finalBlock", checkSumPaddingMessage);
-  renderOutput("allHashedOutput",   md_digest.join("").toString());
-  renderOutput("finalHashedOutput", md_digest.join("").toString().slice(0,32));
+  renderHTMLOutput("ascii_output", convertToAscii());
+  renderHTMLOutput("ascii_output_with_pad",asciiOutputWithPadding);
+  renderHTMLOutput("allCheckSumCalculated", allCheckSumCalculated);
+  renderHTMLOutput("checkSumFinalRow", checksum.slice(-16));
+  renderHTMLOutput("finalBlock", checkSumPaddingMessage);
+  renderHTMLOutput("allHashedOutput",   MD_Digest.join("").toString());
+  renderHTMLOutput("finalHashedOutput", MD_Digest.join("").toString().slice(0,32));
 
 
-  md_digest = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
+  MD_Digest = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
   // checkSumPaddingMessage = [];
 }
 
-function renderOutput(idtag, inputText){
+function renderHTMLOutput(idtag, inputText){
   document.getElementById(idtag).value = inputText;
 }
 
@@ -62,21 +62,19 @@ function convertToAscii() {
 
 function returnNumberOfRows(stringarray = document.getElementById("plaintext").value){
   if (!stringarray) {return 1;}
-
   var result = stringarray.length / blockSize;
   result = Math.ceil(result)+1;
   return result;
 }
 
 function numberOfPaddedValues(stringarray = document.getElementById("plaintext").value){
-  nonPaddedAmount = stringarray.length % blockSize
-  amountOfPaddedNumbers = (blockSize - nonPaddedAmount);
+  amountOfPaddedNumbers = (blockSize - (stringarray.length % blockSize));
   return amountOfPaddedNumbers;
 }
 
-function return_ascii_padded_output(numberOfPads = numberOfPaddedValues(),asciiText = convertToAscii()){  
-    for (var i = 1; i < numberOfPads + 1;  ++i){
-      asciiText.push(numberOfPads);
+function getASCII_PaddedOutput(paddedValues = numberOfPaddedValues(),asciiText = convertToAscii()){  
+    for (var i = 1; i < paddedValues + 1;  ++i){
+      asciiText.push(paddedValues);
     }
   return asciiText;
 }
@@ -88,7 +86,6 @@ function combinechecksumPaddingAscii (checksumoutput,asciiOutputWithPadding){
 }
 
 function populateTable(table ,rows, cells, content) {
-
   var row = document.createElement('tr');
   if (!table) {table = document.createElement('table');
    var thead = document.createElement('thead');
@@ -138,7 +135,7 @@ function getChecksum (message){
     for (let j = 0; j < blockSize; j++) {
       byteValue = message[i * blockSize + j];
       previous_checkbyte = checksum[j] = getXOR(checksum[j], decimalsOfPi[getXOR(byteValue , previous_checkbyte)] );
-      allCheckSumCalculated[j + (16 * i)] = previous_checkbyte;
+      allCheckSumCalculated[j + (blockSize * i)] = previous_checkbyte;
     }
   }
   return checksum
