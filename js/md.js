@@ -10,19 +10,18 @@ var numberOfProcessingRounds = 18;
 var checkSumPaddingMessage = [];
 var MD_Digest = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
 var allCheckSumCalculated = [];
-
+var firstNestedForLoop = [];
+var secondNestedForLoop = [[]];
 
 document.addEventListener("DOMContentLoaded", function() {
   wait(200);
-  tableObject = document.getElementById("startTable").appendChild(populateTable(null, null, 16, null));wait(200);
+  tableObject = document.getElementById("messageBeforeProcessing").appendChild(populateTable(null, null, 16, null));wait(200);
   logKey(); logKeyCSS();
 });
 
 plaintext.addEventListener('keyup', logKey);
 
 function logKey() {
-  wait(50);
-
   var numberOfRowsParam = returnNumberOfRows();
   asciiOutputWithPadding   = getASCII_PaddedOutput();
   checksum = getChecksum(asciiOutputWithPadding);
@@ -30,20 +29,21 @@ function logKey() {
 
   populateTable(tableObject, numberOfRowsParam, blockSize, checkSumPaddingMessage);
 
+
   MD_Digest = hashingProcessing(checkSumPaddingMessage,MD_Digest);
+  console.log(MD_Digest);
+  
+  renderHTMLOutput("ASCIIHashedOutput",MD_Digest);
   MD_Digest = decodeAsciiDecimalToArray(MD_Digest);
 
   renderHTMLOutput("ascii_output", convertToAscii());
   renderHTMLOutput("ascii_output_with_pad",asciiOutputWithPadding);
   renderHTMLOutput("allCheckSumCalculated", allCheckSumCalculated);
-  renderHTMLOutput("checkSumFinalRow", checksum.slice(-16));
-  renderHTMLOutput("finalBlock", checkSumPaddingMessage);
-  renderHTMLOutput("allHashedOutput",   MD_Digest.join("").toString());
+  renderHTMLOutput("checkSumFinalRow" , checksum.slice(-16));
+  renderHTMLOutput("finalBlockBeforeProcessing", checkSumPaddingMessage);
+  renderHTMLOutput("allHashedOutput"  ,   MD_Digest.join("").toString());
   renderHTMLOutput("finalHashedOutput", MD_Digest.join("").toString().slice(0,32));
-
-
   MD_Digest = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
-  // checkSumPaddingMessage = [];
 }
 
 function renderHTMLOutput(idtag, inputText){
@@ -128,7 +128,7 @@ function getXOR (previousChecksum, currentAsciiNumber){
 }
 
 function getChecksum (message){
-  allCheckSumCalculated = [];
+  allCheckSumCalculated = []; SboxXORArrayForTable = []; xorArrayForTable = [];
   var checksum = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
   previous_checkbyte = 0;
   for (let i = 0; i < message.length / blockSize; i++) {
@@ -142,10 +142,11 @@ function getChecksum (message){
 }
 
 function hashingProcessing(checkSumPaddingMessage, md_digest){
+  midArray = []; counter = 0
   for (let i = 0; i <  (checkSumPaddingMessage.length / blockSize); i++) {
       for (let j = 0; j < blockSize; j++) {
         md_digest[blockSize + j] = checkSumPaddingMessage[i * blockSize + j];
-        md_digest[2 * blockSize + j] = getXOR((md_digest[blockSize +j]) , md_digest[j]);     
+        md_digest[2 * blockSize + j] = getXOR((md_digest[blockSize +j]) , md_digest[j]);
       }
     previous_hashbyte = 0;
     for (let j = 0; j < numberOfProcessingRounds; j++) {
