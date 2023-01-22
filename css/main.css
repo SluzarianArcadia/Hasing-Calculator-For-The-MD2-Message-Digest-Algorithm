@@ -285,10 +285,6 @@ textarea {
     overflow: hidden;
 
   }
-
-  div {
-    margin: 10px;
-  }
   
 table {
   width: 100%;
@@ -347,6 +343,8 @@ table thead {
   /* Padding for demo purposes */
   padding: 30px;
   margin-top: 25px;
+  margin-bottom: 15px;
+
 }
 
 .paper,
@@ -399,7 +397,8 @@ table thead {
 #firstInstructions.active {
   transition: all 1s ease-in;
   opacity: 1;
-  height: 900px;
+  height: 750px;
+  overflow: auto;
 }
 
 #showHashingProcessAtWork{
@@ -469,25 +468,14 @@ code {
 
 .activeBtn {
 position: absolute;
-top: 90%;
-left: 71%;
+top: 0%;
 transition: all 1s ease-in;
 }
 
 
 
-.left {
-  vertical-align:top;
-  width: 45%;
-  background: rgb(255, 255, 255);
-  display: inline-block;
-  word-wrap: break-word;
-  padding: 5px;
-  overflow: scroll;
-  max-height: 300px;
 
-}
-.right {
+.scroller {
   vertical-align:top;
   width: 45%;
   background: rgb(175, 175, 175);
@@ -500,7 +488,7 @@ transition: all 1s ease-in;
 }
 
 .hash{
-  max-height: 600px;
+  max-height: 680px;
 }
 
 
@@ -530,4 +518,10 @@ transition: all 1s ease-in;
 .num3item{
   background-color: #005108;
   color: white;
+}
+
+
+.row {
+  margin-top: 5px;
+  padding: 5px;
 }

@@ -1,5 +1,5 @@
 <!doctype html>
-<html class="no-js" lang="">
+<html class="no-js" lang="en">
 
 <head>
   <meta charset="utf-8">
@@ -21,7 +21,7 @@
   <meta name="theme-color" content="#fafafa">
 </head>
 
-<body>
+<body class="container-fluid">
   <h1>MD2 Hash Tutorial Website</h1>
 
 <div class="paper">
@@ -64,27 +64,34 @@
   <input id="plaintext" value="Type Here">
   </div>
 
-  <div class="left">
-    <h3>Ascii Decimal Representation of Plaintext</h3>
-    <textarea id="ascii_output" class="boxsizingBorder"></textarea>  
+  <div class="row">
+    <div class="col-sm-6">
+        <h3>Ascii Decimal Representation of Plaintext</h3>
+        <textarea id="ascii_output" class="boxsizingBorder"></textarea>  
+    </div>
+    <div class="col-sm-6">
+        <script src="https://gist.github.com/SluzarianArcadia/fe4e8a571cd2bfc6d8a60cbcc651aa6f.js"></script>
+    </div>
   </div>
-  <div class="right">
-    <script src="https://gist.github.com/SluzarianArcadia/fe4e8a571cd2bfc6d8a60cbcc651aa6f.js"></script>
-  </div>
 
 
 
+  <div class="row">
 
-  <div class="left">
-    <h3>Ascii Decimal Representation of Plaintext and Padding</h3>
+    <div class="col-sm-6">
+      <h3>Ascii Decimal Representation of Plaintext and Padding</h3>
     <textarea id="ascii_output_with_pad" class="boxsizingBorder"></textarea>
   </div>
-  <div class="right">
+  <div class="col-sm-6">
     <script src="https://gist.github.com/SluzarianArcadia/d009721c38b0b556e5bb79ab40c002e1.js"></script>
   </div>
 
+</div>
 
-  <div class="paper">
+
+
+<div class="row">
+  <div class="paper col-sm-12">
     <p>Next, we need to make a 16-byte checksum calculation to tack on to the end of our ASCII converted and padded message.</p>
     <p>To understand this, we need to know what a substitution table, or Sbox (substitution box), is and how it's used in cryptography. In short, it's a index of random values that is used to diffuse the message digest so that it's harder to get collisions and to crack the algorithm mathematically. </p>
 
@@ -166,8 +173,10 @@
         <li>Third Calculation Result = XOR(LastCheckSumBlockSamePositionCheckSumByte, Second Calculation Result)</li>
       </ol>
   </div>
+</div>
 
-  <div class="left">
+<div class="row">
+  <div class="col-sm-6">
     <h3>All checksumvalues</h3>
     <textarea id="allCheckSumCalculated" class="boxsizingBorder"></textarea>
   
@@ -175,36 +184,43 @@
     <textarea id="checkSumFinalRow" class="boxsizingBorder"></textarea>
   </div>
 
-  <div class="right">
+  <div class="col-sm-6">
     <script src="https://gist.github.com/SluzarianArcadia/76920de8efd8e98f568e959a0380fe9c.js"></script>
   </div>
 
+</div>
 
-
-
+<div class="row">
+  <div class="col-sm-12">
   <h3>Ascii with padding and checksum output</h3>
   <textarea id="finalBlockBeforeProcessing" class="boxsizingBorder"></textarea>
 
   <h3>Table of our 16 byte blocks that will be sent to be processed into a MD2 Hash</h3>
+  </div>
+</div>
 
-  <div class="g-container">
-    <div class="item">
+<div class="paper">
+<div class="row">
+    <div class="col-sm-4">
       <h4>White table cells represent ASCII numbers converted from the message input</h4>
     </div>
-    <div class="num2item item">
+    <div class="num2item col-sm-4">
       <h4>Yellow table cells represent the padding concatenated to fill the 16-byte blocks</h4>
     </div>
-    <div class="num3item item">
+    <div class="num3item col-sm-4">
       <h4>Green table cells represent the checksum row for our message</h4>
     </div>
   </div>
+</div>
 
-
+<div class="row">
   <div id="messageBeforeProcessing"></div>
+</div>
 
   
+<div class="row">
 
-  <div class="left">
+  <div class="col-sm-6">
     <h3>Processed Hash Message Before Turned into Hexadecimal</h3>
     <textarea id="ASCIIHashedOutput" class="boxsizingBorder"></textarea>
 
@@ -213,15 +229,21 @@
     <textarea id="allHashedOutput" class="boxsizingBorder"></textarea>
 
   </div>
-  <div class="right">
+  <div class="col-sm-6">
     <script src="https://gist.github.com/SluzarianArcadia/f5e31045a2afcd72bf944bc122e39f28.js"></script>
   </div>
+</div>
+
 
   <div class="paper hash">
+    <div class="row">
     <h2>What is Happening in This Hashing Function</h2>
     <p>Since it would take a long time to load this page to show each step of the process. I will show the already processed console.log() of the input of "a" below. We have four loops in our hashing function. The first loop (which I will call the master loop) keeps track of our original message rows and helps us keep track of where we are on the padded ASCII message.
     </p>
-      <div class="left">
+    </div>
+    
+    <div class="row">
+      <div class="col-sm-6 scroller">
         <p>As you can see below, this loop works on the second and third blocks of our 48-byte buffer. The first loop inside our master loop has yet another XOR function with another SBOX look-up inside it.</p>
         <code>0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,84,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,84,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
               0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,84,121,0,0,0,0,0,0,0,0,0,0,0,0,0,0,84,121,0,0,0,0,0,0,0,0,0,0,0,0,0,0
@@ -258,7 +280,7 @@
         </code>
       </div>
 
-      <div class="right">
+      <div class="col-sm-6 scroller">
         <p>
           The second and third loops inside our master loop works on the whole buffer, of 48-bytes, an arbitrary number of times (i.e. 18). These loops process it further by again using XOR and the SBox look-up table but over the whole array.
         </p>
@@ -302,14 +324,22 @@
         </code>
         <p>After the hash function, we still don't have the final result. The hash produces ASCII decimals, which then need to be "hexlified", or turned into hexadecimals.</p>
       </div>
+    </div>
+    <div class="row">
 
       <p>Almost done! We have our hash, but we don't use the whole string. We only take the first 32 hexadecimal characters, and that will get the final hashed output. There are lots of little details, but hopefully that explains how this hash and how hashing in general works.</p>
+    </div>
 
     </p>
   </div>
 
-  <h3>MD2 Hash</h3>
-  <textarea id="finalHashedOutput" class="boxsizingBorder"></textarea>
+  <div class="row">
+    <div class="col-sm-12">
+      <h3>MD2 Hash</h3>
+      <textarea id="finalHashedOutput" class="boxsizingBorder"></textarea>
+    </div>
+  </div>
+
 
   <script src="js/vendor/modernizr-3.11.2.min.js"></script>
   <script src="js/decimalsOfPI.js"></script>
@@ -317,6 +347,19 @@
   <script src="js/main.js"></script>
   <script src="js/md.js"></script>
   <script src="js/cssPadding.js"></script>
+
+<!-- Jquery -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.3/jquery.min.js" integrity="sha512-STof4xm1wgkfm7heWqFJVn58Hm3EtS31XFaagaa8VMReCXAkQnJZ+jEy8PCC/iT18dFy95WcExNHFTqLyp72eQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>  
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+<!-- Optional theme -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+
 
 </body>
 </html>
