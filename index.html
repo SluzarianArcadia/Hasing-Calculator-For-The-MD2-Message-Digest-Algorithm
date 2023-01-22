@@ -27,33 +27,32 @@
 <div class="paper">
   <button id="button1" class="btn" onclick="addClass('button1', 'firstInstructions')"> Click Me To Read Instructions <img src="https://www.htmlcssbuttongenerator.com/iconExample-plus-square-multiple-lined.svg" style="width:19px; margin-left:21px; margin-right:0px; flex-direction: row;"></button> 
   <div id="firstInstructions">
-    <p>Welcome to my tutorial calculator for the MD2  hashing algorithm. MD2 is an older hasing algorithm and a nice starting place to learn how hashing works. The simplest explanation of hashing is that you take a string of characters and move it through an algorithm to get another set of characters.</p>
+    <p>Welcome to my tutorial calculator for the MD2  hashing algorithm. MD2 is an older hashing algorithm and a nice place to start learn how hashing works. The simplest explanation of hashing is that you take a string of characters and move them through an algorithm to get another set of characters.</p>
     <h2>Why Use A Hashing Algorithm</h2>
     <ul>
-      <li>Data Structure to Quickly Look Data Up</li>
+      <li>Data Structure to Quickly Look Up Data</li>
       <li>Verifying the Integrity of Messages and Files</li>
       <li>Secure Password Storage and Verification</li>
-      <li>Storing Passwords as Hash Digests Instead of Plaintext</li>
       <li>Signature Generation and Verification</li>
       <li>Proof-of-work</li>
     </ul>
 
-  <p>More specifically hashing algorithms can take any data of any size (even "") and turn it into a fixed size of values. That could be your password, a whole text of a book, the zero and ones of a file, and any picture.</p>
-  <p>Hashing algorithms are a one way process unlike key algorithms. It's mathematical unlikely a hacker will form a reverse algorithm to turn all the hashes back to plain-text. This would mean the algorithm has been cracked (which this one has been so please don’t use it!).</p>
-  <p>I used Javascript to turn this MD2 Hash into a interactive calculator. This is to lift the mystery of these types of hashing and reveal the gears underneath the hood.</p>
+  <p>More specifically, hashing algorithms can take any data of any size (even a string of nothing e.g."") and turn it into a hash with a fixed set of values. That could be your password, a chapter of a book, the zero and ones of a file, and any picture.</p>
+  <p>Hashing algorithms are a one way process, unlike key algorithms. It's mathematically unlikely that a hacker will form a reverse algorithm to turn all the hashes back to plain-text. This would mean the algorithm has been cracked, (which this one has been, so please don’t use it!).</p>
+  <p>I used Javascript to turn this MD2 hash into an interactive calculator. This is to lift the mystery of these types of hashing and reveal the gears underneath the hood.</p>
 
     <h2>The initial M2 standard : RFC 1319</h2>
-    <p>The original paper that debuted the algorithm was the RFC 1319. RFC stands for request for comments.</p>
-    <a href="https://www.rfc-editor.org/rfc/rfc1319">Link To Original RFC</a>
-    <p>The original had errors so they fixed the erros with an update .</p>
-    <a href="https://www.rfc-editor.org/rfc/inline-errata/rfc1319.html">Link To Corrected RFC</a>
+    <p>The original paper that debuted the algorithm was RFC 1319. RFC stands for "request for comments."</p>
+    <a href="https://www.rfc-editor.org/rfc/rfc1319">Link To The Original RFC</a>
+    <p>The original had errors, so they fixed the erros with an update .</p>
+    <a href="https://www.rfc-editor.org/rfc/inline-errata/rfc1319.html">Link To The Corrected RFC</a>
     <br>
-    <p>The Steps Outlined are as follows</p>
+    <p>The steps outlined are as follows:</p>
     <ol>
       <li>Padding the message</li>
       <li>Append checksum</li>
       <li>Initialize digest</li>
-      <li>Process the message in 16-bytes blocks</li>
+      <li>Process the message in 16-byte blocks</li>
       <li>Output</li>
     </ol>
   </div>
@@ -87,9 +86,9 @@
 
   <div class="paper">
     <p>Next we need to make a 16 byte checksum calculation to tack on to the end of our ASCII converted and padded message.</p>
-    <p>First to understand this we need to know what a substitution table or Sbox (substitution box) is and how it's used in cryptography. In short it's a index of random values that is used to diffuse the message digest so that it's harder to get collisions and to crack the alogorthim mathematically. </p>
+    <p>To understand this, we need to know what a substitution table, or Sbox (substitution box), is and how it's used in cryptography. In short it's a index of random values that is used to diffuse the message digest so that it's harder to get collisions and to crack the algorithm mathematically. </p>
 
-    <p>The Sbox used for the MD2 is an index of 256 elements that correspond to the 256 elements found in our ASCII representation. The numbers are derived from decimals of PI that were randomly scattered in the Sbox.</p>
+    <p>The Sbox used for the MD2 is an index of 256 elements that corresponds to the 256 elements found in our ASCII representation. The numbers are derived from decimals of PI that were randomly scattered in the Sbox.</p>
     <code>S = [
       41, 46, 67, 201, 162, 216, 124, 1, 61, 54, 84, 161, 236, 240, 6, 19,
       98, 167, 5, 243, 192, 199, 115, 140, 152, 147, 43, 217, 188, 76, 130, 202,
@@ -108,7 +107,7 @@
       242, 239, 183, 14, 102, 88, 208, 228, 166, 119, 114, 248, 235, 117, 75, 10,
       49, 68, 80, 180, 143, 237, 31, 26, 219, 153, 141, 51, 159, 17, 131, 20]</code>
 
-      <p>Before we can understand the checksum method we need to know "what exlusive or" is or "XOR". It is a logical operation that is true if and only if it's arguments differ. </p>
+      <p>Before we can understand the checksum method, we need to know what "exclusive or" is or "XOR." It is a logical operation that is true if and only if it's arguments differ. </p>
       <table>
         <thead>
           <tr>
@@ -140,11 +139,11 @@
           </tr>
         </tbody>
       </table>
-      <p>Specifically we are taking the binary of our ascii bytes and comparing them against each other to produce the XORed result.</p>
-      <p>This is a signed binary system so ignore the leading 0.  Below you can test out the XOR function and what it produces. We will use the XOR function four different places in our code to get our final digest. XOR functions are used a lot in hashing due to it's speed and perfect balance in producing a more random result (if the input is random).</p>
+      <p>Specifically, we are taking the binary of our ascii bytes and comparing them against each other to produce the XORed result.</p>
+      <p>This is a signed binary system, so ignore the leading 0.  Below, you can test out the XOR function and what it produces. We will use the XOR function at four different places in our code to get our final digest. XOR functions are used a lot in hashing due to it's speed and perfect balance in producing a more random result (if the input is random).</p>
 
-      <input id="xorInput1" value ="3"/><span> ^ </span> 
-      <input id="xorInput2" value ="5"/><span> = </span> 
+      <input id="xorInput1" value ="3"/><span> ^ </span>
+      <input id="xorInput2" value ="5"/><span> = </span>
       <input id="xorInput3"/>
       <button onClick="convert();">Convert!</button> <br>
 
@@ -153,14 +152,19 @@
       <input id="xorOutput3"/>
 
 
-      <p> You can see the function below which passes over our 16 byte blocks deriving a 16 byte checksum.
-        We first XOR the current byte value and the previous byte value(if none it is initially zero).
+      <p> You can see the function below, which passes over our 16 byte blocks to derive a 16 byte checksum.
+        We first XOR the current byte value and the previous byte value (if none it is initially zero).
         This number will then be used against the Sbox index to find a number there. 
-        The indexed number will then be XORed against the last checksum number in the same 16 byte block position that we are currently on this result replaces the previous checksum.
+        The indexed number will then be XORed against the last checksum number in the same 16-byte block position that we are currently on. This result replaces the previous checksum in same block position.
       </p>
       <h3>
         Pseudocode <br>   XOR(LastBlockSamePositionCheckSumByte,  SboxLookUp[  XOR(SameBlockPreviousCheckSumByte, ASCIIByte)  ])
       </h3>
+      <ol>
+        <li>First Calculation Result =  XOR(SameBlockPreviousCheckSumByte, ASCIIByte)</li>
+        <li>Second Calculation Result = SboxLookUp[First Calculation Result]</li>
+        <li>Third Calculation Result = XOR(LastCheckSumBlockSamePositionCheckSumByte, Second Calculation Result)</li>
+      </ol>
   </div>
 
   <div class="left">
@@ -187,25 +191,112 @@
   
 
   <div class="left">
+    <h3>Processed Hash Message Before Turned into Hexadecimal</h3>
+    <textarea id="ASCIIHashedOutput" class="boxsizingBorder"></textarea>
+
+
     <h3>Full Length String of Hash</h3>
     <textarea id="allHashedOutput" class="boxsizingBorder"></textarea>
-    <h3>MD2 Hash</h3>
-    <textarea id="finalHashedOutput" class="boxsizingBorder"></textarea>
+
   </div>
   <div class="right">
     <script src="https://gist.github.com/SluzarianArcadia/f5e31045a2afcd72bf944bc122e39f28.js"></script>
   </div>
 
-  <div class="paper">
+  <div class="paper hash">
     <h2>What is Happening in This Hashing Function</h2>
-    <p></p>
+    <p>Since it would take a long time to load this page to show each step of the process. I will show the alreay processed console.log() of the input of "a" below. We have four loops in our hashing function. The first loop (which I will call the master loop) keeps track of our orginal message rows and helps us keep track where we are on the padded ASCII message.
+    </p>
+      <div class="left">
+        <p>As you can see below this loop works on the second and third blocks of our 48-byte buffer. The first loop inside of our master loop has yet another XOR function with another SBOX look up inside it.</p>
+        <code>0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,84,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,84,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+              0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,84,121,0,0,0,0,0,0,0,0,0,0,0,0,0,0,84,121,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+              0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,84,121,112,0,0,0,0,0,0,0,0,0,0,0,0,0,84,121,112,0,0,0,0,0,0,0,0,0,0,0,0,0
+              0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,84,121,112,101,0,0,0,0,0,0,0,0,0,0,0,0,84,121,112,101,0,0,0,0,0,0,0,0,0,0,0,0
+              0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,84,121,112,101,32,0,0,0,0,0,0,0,0,0,0,0,84,121,112,101,32,0,0,0,0,0,0,0,0,0,0,0
+              0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,84,121,112,101,32,72,0,0,0,0,0,0,0,0,0,0,84,121,112,101,32,72,0,0,0,0,0,0,0,0,0,0
+              0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,84,121,112,101,32,72,101,0,0,0,0,0,0,0,0,0,84,121,112,101,32,72,101,0,0,0,0,0,0,0,0,0
+              0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,84,121,112,101,32,72,101,114,0,0,0,0,0,0,0,0,84,121,112,101,32,72,101,114,0,0,0,0,0,0,0,0
+              0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,84,121,112,101,32,72,101,114,101,0,0,0,0,0,0,0,84,121,112,101,32,72,101,114,101,0,0,0,0,0,0,0
+              0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,84,121,112,101,32,72,101,114,101,7,0,0,0,0,0,0,84,121,112,101,32,72,101,114,101,7,0,0,0,0,0,0
+              0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,84,121,112,101,32,72,101,114,101,7,7,0,0,0,0,0,84,121,112,101,32,72,101,114,101,7,7,0,0,0,0,0
+              0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,84,121,112,101,32,72,101,114,101,7,7,7,0,0,0,0,84,121,112,101,32,72,101,114,101,7,7,7,0,0,0,0
+              0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,84,121,112,101,32,72,101,114,101,7,7,7,7,0,0,0,84,121,112,101,32,72,101,114,101,7,7,7,7,0,0,0
+              0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,84,121,112,101,32,72,101,114,101,7,7,7,7,7,0,0,84,121,112,101,32,72,101,114,101,7,7,7,7,7,0,0
+              0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,84,121,112,101,32,72,101,114,101,7,7,7,7,7,7,0,84,121,112,101,32,72,101,114,101,7,7,7,7,7,7,0
+              0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,84,121,112,101,32,72,101,114,101,7,7,7,7,7,7,7,84,121,112,101,32,72,101,114,101,7,7,7,7,7,7,7
+              92,198,92,64,175,113,118,51,169,85,77,164,197,178,201,54,90,117,24,210,53,232,217,110,112,233,136,112,150,68,228,50,6,221,6,139,33,242,181,174,225,128,24,197,247,182,171,93
+              92,198,92,64,175,113,118,51,169,85,77,164,197,178,201,54,90,60,24,210,53,232,217,110,112,233,136,112,150,68,228,50,6,250,6,139,33,242,181,174,225,128,24,197,247,182,171,93
+              92,198,92,64,175,113,118,51,169,85,77,164,197,178,201,54,90,60,11,210,53,232,217,110,112,233,136,112,150,68,228,50,6,250,87,139,33,242,181,174,225,128,24,197,247,182,171,93
+              92,198,92,64,175,113,118,51,169,85,77,164,197,178,201,54,90,60,11,170,53,232,217,110,112,233,136,112,150,68,228,50,6,250,87,234,33,242,181,174,225,128,24,197,247,182,171,93
+              92,198,92,64,175,113,118,51,169,85,77,164,197,178,201,54,90,60,11,170,207,232,217,110,112,233,136,112,150,68,228,50,6,250,87,234,96,242,181,174,225,128,24,197,247,182,171,93
+              92,198,92,64,175,113,118,51,169,85,77,164,197,178,201,54,90,60,11,170,207,32,217,110,112,233,136,112,150,68,228,50,6,250,87,234,96,81,181,174,225,128,24,197,247,182,171,93
+              92,198,92,64,175,113,118,51,169,85,77,164,197,178,201,54,90,60,11,170,207,32,178,110,112,233,136,112,150,68,228,50,6,250,87,234,96,81,196,174,225,128,24,197,247,182,171,93
+              92,198,92,64,175,113,118,51,169,85,77,164,197,178,201,54,90,60,11,170,207,32,178,106,112,233,136,112,150,68,228,50,6,250,87,234,96,81,196,89,225,128,24,197,247,182,171,93
+              92,198,92,64,175,113,118,51,169,85,77,164,197,178,201,54,90,60,11,170,207,32,178,106,19,233,136,112,150,68,228,50,6,250,87,234,96,81,196,89,186,128,24,197,247,182,171,93
+              92,198,92,64,175,113,118,51,169,85,77,164,197,178,201,54,90,60,11,170,207,32,178,106,19,192,136,112,150,68,228,50,6,250,87,234,96,81,196,89,186,149,24,197,247,182,171,93
+              92,198,92,64,175,113,118,51,169,85,77,164,197,178,201,54,90,60,11,170,207,32,178,106,19,192,250,112,150,68,228,50,6,250,87,234,96,81,196,89,186,149,183,197,247,182,171,93
+              92,198,92,64,175,113,118,51,169,85,77,164,197,178,201,54,90,60,11,170,207,32,178,106,19,192,250,17,150,68,228,50,6,250,87,234,96,81,196,89,186,149,183,181,247,182,171,93
+              92,198,92,64,175,113,118,51,169,85,77,164,197,178,201,54,90,60,11,170,207,32,178,106,19,192,250,17,115,68,228,50,6,250,87,234,96,81,196,89,186,149,183,181,182,182,171,93
+              92,198,92,64,175,113,118,51,169,85,77,164,197,178,201,54,90,60,11,170,207,32,178,106,19,192,250,17,115,150,228,50,6,250,87,234,96,81,196,89,186,149,183,181,182,36,171,93
+              92,198,92,64,175,113,118,51,169,85,77,164,197,178,201,54,90,60,11,170,207,32,178,106,19,192,250,17,115,150,96,50,6,250,87,234,96,81,196,89,186,149,183,181,182,36,169,93
+              92,198,92,64,175,113,118,51,169,85,77,164,197,178,201,54,90,60,11,170,207,32,178,106,19,192,250,17,115,150,96,209,6,250,87,234,96,81,196,89,186,149,183,181,182,36,169,231
+        </code>
+      </div>
+
+      <div class="right">
+        <p>
+          The second and third loops inside our master loop works on the whole buffer, of 48-bytes, an  arbitrary number of times (i.e. 18). These loops process it further by again using XOR and the SBox look-up table but over the whole array.
+        </p>
+        <code>
+          41,66,121,252,159,15,19,243,180,133,113,184,211,139,101,165,5,161,55,44,170,177,54,172,223,62,233,112,72,147,170,254,215,20,176,73,226,255,113,202,30,133,118,122,108,171,201,230
+          249,219,135,220,164,210,134,116,34,210,228,222,206,58,144,190,72,53,169,112,229,233,65,196,179,80,105,46,173,86,152,226,96,235,72,221,226,72,229,146,59,11,215,23,224,89,247,252
+          232,125,243,104,115,0,175,82,127,35,216,55,135,26,187,74,88,0,128,53,123,11,224,54,109,6,21,233,218,131,193,62,142,67,217,22,145,40,130,226,140,237,162,180,101,252,104,43
+          255,105,173,173,182,132,203,90,179,77,250,186,74,10,239,64,241,68,149,133,10,95,227,56,205,187,225,6,166,44,75,183,135,99,106,132,245,197,67,115,94,122,201,85,245,17,207,97
+          183,96,82,240,135,164,22,41,241,9,204,182,206,187,27,153,183,77,183,140,236,180,102,141,224,73,35,58,83,182,207,253,150,218,191,214,29,137,24,235,166,213,170,172,79,48,113,217
+          183,105,12,28,59,42,121,213,146,44,70,177,157,251,40,254,52,151,65,228,138,123,132,233,151,191,113,130,35,138,0,212,117,126,187,34,74,153,94,124,58,32,180,41,13,192,27,0
+          111,175,42,115,233,93,142,125,230,252,217,122,246,228,78,161,115,69,243,80,10,47,150,80,23,51,167,184,240,187,244,91,146,91,92,157,10,205,227,114,2,99,7,40,106,82,70,7
+          159,160,127,130,153,27,87,90,42,147,116,236,29,168,141,140,149,245,30,210,159,32,136,214,255,39,177,235,8,134,115,137,201,186,145,253,27,20,35,78,93,148,169,116,252,205,251,52
+          17,7,126,134,30,153,17,253,59,29,56,76,22,219,115,94,2,182,154,179,241,100,192,188,190,106,35,215,101,35,79,168,10,238,218,40,124,136,165,31,151,98,153,50,56,109,173,241
+          136,129,227,136,152,133,96,2,120,107,18,73,212,56,211,213,97,175,188,242,161,35,252,35,130,26,8,234,23,175,105,246,21,41,152,52,166,39,179,113,47,112,214,218,237,24,53,111
+          254,2,160,221,152,153,38,226,207,33,137,18,209,176,255,193,189,46,89,204,173,230,44,169,222,7,9,220,44,37,189,119,163,10,204,56,6,91,84,43,55,57,45,205,80,152,41,45
+          183,11,1,243,44,19,213,129,82,124,21,213,178,189,126,197,124,178,84,150,20,38,204,165,143,5,209,84,118,88,136,241,231,238,135,24,158,37,128,110,157,121,209,69,226,47,59,163
+          93,252,158,141,1,61,250,12,190,49,91,50,118,192,20,5,164,111,146,179,122,77,238,238,196,105,143,86,68,77,170,8,218,59,9,46,123,199,122,5,69,203,217,142,74,63,65,203
+          48,66,231,105,95,62,20,204,178,60,224,192,28,124,136,131,253,126,150,10,46,168,45,249,93,158,241,18,65,37,126,12,54,229,81,81,4,101,223,60,254,72,77,172,240,14,71,244
+          30,192,141,68,74,46,241,136,52,230,48,126,24,228,238,200,217,181,190,71,17,15,62,23,209,22,130,98,113,157,62,226,129,120,39,71,59,235,39,42,145,40,42,195,56,174,173,49
+          100,136,11,229,18,43,233,255,32,248,235,134,159,235,22,187,45,162,29,11,176,35,2,84,139,115,80,226,198,54,224,16,227,118,90,139,94,124,187,222,140,206,155,170,193,114,149,129
+          127,121,247,255,6,87,206,78,127,9,221,134,24,115,196,215,64,11,188,74,160,118,127,165,218,166,255,246,217,253,241,84,185,169,6,247,68,105,229,134,11,111,93,93,54,172,47,147
+          92,198,92,64,175,113,118,51,169,85,77,164,197,178,201,54,158,117,24,210,53,232,217,110,112,233,136,112,150,68,228,50,125,221,6,139,33,242,181,174,225,128,24,197,247,182,171,93
+          117,98,108,236,68,100,62,221,169,9,123,70,194,133,184,229,2,127,250,39,217,235,74,122,120,182,126,21,180,19,147,124,154,155,62,4,194,102,113,225,85,5,111,115,100,108,5,63
+          15,113,212,15,87,67,175,251,154,104,172,252,93,114,128,160,87,88,207,109,143,233,61,85,232,16,28,169,232,181,187,136,28,39,40,99,113,222,108,77,119,179,1,93,147,193,217,244
+          226,198,127,254,212,160,250,118,231,140,74,236,182,246,159,175,113,224,61,66,246,246,34,2,171,222,1,135,200,145,219,118,97,62,198,200,85,78,51,155,30,49,79,124,15,210,76,255
+          204,202,4,92,107,138,53,232,65,228,44,102,3,63,229,247,107,202,70,69,68,227,44,136,45,201,224,117,108,61,244,249,248,229,158,182,209,198,152,135,62,223,118,1,33,73,142,87
+          0,227,10,8,86,184,230,56,225,11,141,75,138,240,212,20,171,4,228,35,120,149,156,188,108,101,69,199,150,132,144,226,79,196,242,230,1,232,62,105,96,32,104,214,201,168,77,117
+          252,124,150,177,5,96,25,171,47,25,30,201,107,218,1,58,94,147,73,225,151,99,47,174,134,226,242,151,96,123,114,218,154,165,163,197,192,130,78,54,190,109,62,56,105,246,82,40
+          235,132,242,225,234,18,28,23,163,58,235,49,37,14,7,59,208,235,177,178,154,2,108,2,197,35,206,38,128,62,156,238,209,45,180,64,105,220,117,146,155,4,156,12,133,135,114,16
+          152,152,238,170,19,225,243,163,128,127,26,26,14,8,58,206,97,242,225,93,109,84,54,220,254,160,155,79,161,121,96,17,118,80,52,154,8,225,154,243,47,22,239,6,249,30,240,33
+          255,140,8,151,229,185,44,41,194,72,142,178,3,193,230,30,227,252,126,89,83,206,135,252,97,185,68,90,109,47,114,41,52,138,251,169,84,187,110,89,17,177,188,71,198,181,216,200
+          135,172,178,154,132,221,44,163,225,167,180,55,74,209,110,180,102,73,188,24,203,198,44,118,28,5,156,110,199,213,17,142,156,190,182,45,67,42,1,119,167,139,217,140,32,171,22,187
+          235,84,232,60,63,167,22,208,153,225,91,208,50,21,169,232,192,35,128,93,60,125,88,67,141,40,251,93,48,107,59,0,181,150,15,62,173,239,11,214,79,170,32,146,5,115,196,215
+          4,246,247,38,223,158,104,7,152,253,74,192,88,32,183,225,47,49,206,236,215,16,58,182,9,30,121,161,119,221,59,142,29,218,218,235,85,127,250,91,168,105,126,150,188,50,0,254
+          50,50,51,240,238,213,11,166,55,180,207,138,151,214,95,226,152,45,217,39,193,204,54,104,222,3,176,141,90,17,156,186,208,162,121,23,217,180,127,170,81,22,13,102,9,4,162,93
+          108,158,77,210,123,55,66,223,14,178,194,189,22,165,14,228,254,174,51,241,133,189,183,97,199,249,41,207,16,115,78,229,136,36,132,115,11,21,184,121,173,211,134,225,230,212,65,53
+          21,89,115,0,82,106,208,167,52,104,21,122,125,209,134,99,77,140,213,146,160,232,17,198,108,85,185,16,114,75,199,31,66,93,115,161,76,30,58,140,75,90,74,241,162,119,247,47
+          58,172,201,225,189,235,40,192,94,255,1,84,39,199,124,255,89,178,216,123,66,145,113,126,104,130,201,241,54,149,119,169,30,223,74,177,31,212,217,71,116,204,70,246,189,246,232,137
+          38,76,194,214,85,123,202,187,170,6,125,32,57,60,199,5,129,47,202,0,107,187,133,15,123,96,54,47,36,104,160,252,129,66,51,103,206,101,124,219,138,3,143,244,50,50,44,3
+          213,47,208,174,191,41,136,61,133,119,203,40,94,171,9,51,87,8,247,26,64,18,128,74,107,74,38,207,110,194,151,10,213,33,168,164,19,150,197,26,161,68,154,149,130,66,85,147
+        </code>
+        <p>After the hash function, we still don't have the final result. The hash produces ASCII decimals, which then need to be "hexlified", or turned into hexadecimals.</p>
+      </div>
+
+      <p>Almost done! We have our hash, but we don't use the whole string. We only take the first 32 hexadecimal characters, and that will get the final hashed output. There are lots of little details but hopefully that explains how this hash and how hashing in general works.</p>
+
+    </p>
   </div>
 
- 
+  <h3>MD2 Hash</h3>
+  <textarea id="finalHashedOutput" class="boxsizingBorder"></textarea>
 
-
-
-  
   <script src="js/vendor/modernizr-3.11.2.min.js"></script>
   <script src="js/decimalsOfPI.js"></script>
   <script src="js/plugins.js"></script>
@@ -213,9 +304,5 @@
   <script src="js/md.js"></script>
   <script src="js/cssPadding.js"></script>
 
-  
-
-
 </body>
-
 </html>
