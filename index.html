@@ -27,7 +27,7 @@
 <div class="paper">
   <button id="button1" class="btn" onclick="addClass('button1', 'firstInstructions')"> Click Me To Read Instructions <img src="https://www.htmlcssbuttongenerator.com/iconExample-plus-square-multiple-lined.svg" style="width:19px; margin-left:21px; margin-right:0px; flex-direction: row;"></button> 
   <div id="firstInstructions">
-    <p>Welcome to my tutorial calculator for the MD2  hashing algorithm. MD2 is an older hashing algorithm and a nice place to start learning how hashing works. The simplest explanation of hashing is that you take a string of characters and move them through an algorithm to get another set of characters.</p>
+    <p>Welcome to my tutorial calculator for the MD2  hashing algorithm. MD2 is an older hashing algorithm and a nice place to start learning how hashing works. The simplest explanation of hashing is that you take a string of characters and move them through an algorithm to get a different set of characters.</p>
     <h2>Why Use A Hashing Algorithm</h2>
     <ul>
       <li>Data Structure to Quickly Look Up Data</li>
@@ -39,21 +39,21 @@
 
   <p>More specifically, hashing algorithms can take any data of any size (even a string of nothing e.g."") and turn it into a hash with a fixed set of values. That could be your password, a chapter of a book, the zeros and ones of a file, or the data of any photo.</p>
   <p>Hashing algorithms are a one-way process, unlike key algorithms. It's mathematically unlikely that a hacker will form a reverse algorithm to turn all the hashes back to plain-text. This would mean the algorithm has been cracked, (which this one has been, so please don’t use it!).</p>
-  <p>I used Javascript to turn this MD2 hash into an interactive calculator. This is to lift the mystery of these types of hashing and reveal the gears underneath the hood.</p>
+  <p>I used Javascript to turn this MD2 hash into an interactive calculator. This is to lift the mystery of hashing for newcomers and reveal the gears underneath the hood.</p>
 
     <h2>The initial M2 standard : RFC 1319</h2>
     <p>The original paper that debuted the algorithm was RFC 1319. RFC stands for "request for comments."</p>
     <a href="https://www.rfc-editor.org/rfc/rfc1319">Link To The Original RFC</a>
-    <p>The original had errors, so they fixed the errors with an update .</p>
+    <p>The original had errors, so they fixed the errors with an update.</p>
     <a href="https://www.rfc-editor.org/rfc/inline-errata/rfc1319.html">Link To The Corrected RFC</a>
     <br>
     <p>The steps outlined are as follows:</p>
     <ol>
       <li>Padding the message</li>
       <li>Append checksum</li>
-      <li>Initialize digest</li>
+      <li>Initialize digest (Not for Javascript more for langauges like C)</li>
       <li>Process the message in 16-byte blocks</li>
-      <li>Output</li>
+      <li>Output in Hexadecimal</li>
     </ol>
   </div>
 </div>
@@ -186,6 +186,20 @@
   <textarea id="finalBlockBeforeProcessing" class="boxsizingBorder"></textarea>
 
   <h3>Table of our 16 byte blocks that will be sent to be processed into a MD2 Hash</h3>
+
+  <div class="g-container">
+    <div class="item">
+      <h4>White table cells represent ASCII numbers converted from the message input</h4>
+    </div>
+    <div class="num2item item">
+      <h4>Yellow table cells represent the padding concatenated to fill the 16-byte blocks</h4>
+    </div>
+    <div class="num3item item">
+      <h4>Green table cells represent the checksum row for our message</h4>
+    </div>
+  </div>
+
+
   <div id="messageBeforeProcessing"></div>
 
   

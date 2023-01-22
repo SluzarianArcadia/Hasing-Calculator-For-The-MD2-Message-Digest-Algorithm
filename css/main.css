@@ -502,3 +502,32 @@ transition: all 1s ease-in;
 .hash{
   max-height: 600px;
 }
+
+
+
+.g-container {
+  display: grid;
+    grid-template-columns: 1fr;
+  width: 100%;
+  background: rgb(255, 255, 255);
+}
+
+@media (min-width: 500px) {
+  .g-container {
+  grid-template-columns: 1fr 1fr 1fr;
+  }
+}
+
+.item {
+  border: 2px dashed #000;
+  padding: 1rem;
+  margin: 2px;
+}
+
+.num2item {
+  background-color: yellow;
+}
+.num3item{
+  background-color: #005108;
+  color: white;
+}
