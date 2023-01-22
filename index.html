@@ -27,7 +27,7 @@
 <div class="paper">
   <button id="button1" class="btn" onclick="addClass('button1', 'firstInstructions')"> Click Me To Read Instructions <img src="https://www.htmlcssbuttongenerator.com/iconExample-plus-square-multiple-lined.svg" style="width:19px; margin-left:21px; margin-right:0px; flex-direction: row;"></button> 
   <div id="firstInstructions">
-    <p>Welcome to my tutorial calculator for the MD2  hashing algorithm. MD2 is an older hashing algorithm and a nice place to start learn how hashing works. The simplest explanation of hashing is that you take a string of characters and move them through an algorithm to get another set of characters.</p>
+    <p>Welcome to my tutorial calculator for the MD2  hashing algorithm. MD2 is an older hashing algorithm and a nice place to start learning how hashing works. The simplest explanation of hashing is that you take a string of characters and move them through an algorithm to get another set of characters.</p>
     <h2>Why Use A Hashing Algorithm</h2>
     <ul>
       <li>Data Structure to Quickly Look Up Data</li>
@@ -37,14 +37,14 @@
       <li>Proof-of-work</li>
     </ul>
 
-  <p>More specifically, hashing algorithms can take any data of any size (even a string of nothing e.g."") and turn it into a hash with a fixed set of values. That could be your password, a chapter of a book, the zero and ones of a file, and any picture.</p>
-  <p>Hashing algorithms are a one way process, unlike key algorithms. It's mathematically unlikely that a hacker will form a reverse algorithm to turn all the hashes back to plain-text. This would mean the algorithm has been cracked, (which this one has been, so please don’t use it!).</p>
+  <p>More specifically, hashing algorithms can take any data of any size (even a string of nothing e.g."") and turn it into a hash with a fixed set of values. That could be your password, a chapter of a book, the zeros and ones of a file, or the data of any photo.</p>
+  <p>Hashing algorithms are a one-way process, unlike key algorithms. It's mathematically unlikely that a hacker will form a reverse algorithm to turn all the hashes back to plain-text. This would mean the algorithm has been cracked, (which this one has been, so please don’t use it!).</p>
   <p>I used Javascript to turn this MD2 hash into an interactive calculator. This is to lift the mystery of these types of hashing and reveal the gears underneath the hood.</p>
 
     <h2>The initial M2 standard : RFC 1319</h2>
     <p>The original paper that debuted the algorithm was RFC 1319. RFC stands for "request for comments."</p>
     <a href="https://www.rfc-editor.org/rfc/rfc1319">Link To The Original RFC</a>
-    <p>The original had errors, so they fixed the erros with an update .</p>
+    <p>The original had errors, so they fixed the errors with an update .</p>
     <a href="https://www.rfc-editor.org/rfc/inline-errata/rfc1319.html">Link To The Corrected RFC</a>
     <br>
     <p>The steps outlined are as follows:</p>
@@ -85,8 +85,8 @@
 
 
   <div class="paper">
-    <p>Next we need to make a 16 byte checksum calculation to tack on to the end of our ASCII converted and padded message.</p>
-    <p>To understand this, we need to know what a substitution table, or Sbox (substitution box), is and how it's used in cryptography. In short it's a index of random values that is used to diffuse the message digest so that it's harder to get collisions and to crack the algorithm mathematically. </p>
+    <p>Next, we need to make a 16-byte checksum calculation to tack on to the end of our ASCII converted and padded message.</p>
+    <p>To understand this, we need to know what a substitution table, or Sbox (substitution box), is and how it's used in cryptography. In short, it's a index of random values that is used to diffuse the message digest so that it's harder to get collisions and to crack the algorithm mathematically. </p>
 
     <p>The Sbox used for the MD2 is an index of 256 elements that corresponds to the 256 elements found in our ASCII representation. The numbers are derived from decimals of PI that were randomly scattered in the Sbox.</p>
     <code>S = [
@@ -107,7 +107,7 @@
       242, 239, 183, 14, 102, 88, 208, 228, 166, 119, 114, 248, 235, 117, 75, 10,
       49, 68, 80, 180, 143, 237, 31, 26, 219, 153, 141, 51, 159, 17, 131, 20]</code>
 
-      <p>Before we can understand the checksum method, we need to know what "exclusive or" is or "XOR." It is a logical operation that is true if and only if it's arguments differ. </p>
+      <p>Before we can understand the checksum method, we need to know what "exclusive or" is or "XOR." It is a logical operation that is true if and only if its arguments differ. </p>
       <table>
         <thead>
           <tr>
@@ -152,7 +152,7 @@
       <input id="xorOutput3"/>
 
 
-      <p> You can see the function below, which passes over our 16 byte blocks to derive a 16 byte checksum.
+      <p> You can see the function below, which passes over our 16-byte blocks to derive a 16-byte checksum.
         We first XOR the current byte value and the previous byte value (if none it is initially zero).
         This number will then be used against the Sbox index to find a number there. 
         The indexed number will then be XORed against the last checksum number in the same 16-byte block position that we are currently on. This result replaces the previous checksum in same block position.
@@ -205,10 +205,10 @@
 
   <div class="paper hash">
     <h2>What is Happening in This Hashing Function</h2>
-    <p>Since it would take a long time to load this page to show each step of the process. I will show the alreay processed console.log() of the input of "a" below. We have four loops in our hashing function. The first loop (which I will call the master loop) keeps track of our orginal message rows and helps us keep track where we are on the padded ASCII message.
+    <p>Since it would take a long time to load this page to show each step of the process. I will show the already processed console.log() of the input of "a" below. We have four loops in our hashing function. The first loop (which I will call the master loop) keeps track of our original message rows and helps us keep track of where we are on the padded ASCII message.
     </p>
       <div class="left">
-        <p>As you can see below this loop works on the second and third blocks of our 48-byte buffer. The first loop inside of our master loop has yet another XOR function with another SBOX look up inside it.</p>
+        <p>As you can see below, this loop works on the second and third blocks of our 48-byte buffer. The first loop inside our master loop has yet another XOR function with another SBOX look-up inside it.</p>
         <code>0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,84,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,84,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
               0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,84,121,0,0,0,0,0,0,0,0,0,0,0,0,0,0,84,121,0,0,0,0,0,0,0,0,0,0,0,0,0,0
               0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,84,121,112,0,0,0,0,0,0,0,0,0,0,0,0,0,84,121,112,0,0,0,0,0,0,0,0,0,0,0,0,0
@@ -246,7 +246,7 @@
 
       <div class="right">
         <p>
-          The second and third loops inside our master loop works on the whole buffer, of 48-bytes, an  arbitrary number of times (i.e. 18). These loops process it further by again using XOR and the SBox look-up table but over the whole array.
+          The second and third loops inside our master loop works on the whole buffer, of 48-bytes, an arbitrary number of times (i.e. 18). These loops process it further by again using XOR and the SBox look-up table but over the whole array.
         </p>
         <code>
           41,66,121,252,159,15,19,243,180,133,113,184,211,139,101,165,5,161,55,44,170,177,54,172,223,62,233,112,72,147,170,254,215,20,176,73,226,255,113,202,30,133,118,122,108,171,201,230
@@ -289,7 +289,7 @@
         <p>After the hash function, we still don't have the final result. The hash produces ASCII decimals, which then need to be "hexlified", or turned into hexadecimals.</p>
       </div>
 
-      <p>Almost done! We have our hash, but we don't use the whole string. We only take the first 32 hexadecimal characters, and that will get the final hashed output. There are lots of little details but hopefully that explains how this hash and how hashing in general works.</p>
+      <p>Almost done! We have our hash, but we don't use the whole string. We only take the first 32 hexadecimal characters, and that will get the final hashed output. There are lots of little details, but hopefully that explains how this hash and how hashing in general works.</p>
 
     </p>
   </div>
