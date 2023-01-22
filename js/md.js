@@ -28,11 +28,7 @@ function logKey() {
   checkSumPaddingMessage = combinechecksumPaddingAscii(checksum, asciiOutputWithPadding);
 
   populateTable(tableObject, numberOfRowsParam, blockSize, checkSumPaddingMessage);
-
-
-  MD_Digest = hashingProcessing(checkSumPaddingMessage,MD_Digest);
-  console.log(MD_Digest);
-  
+  MD_Digest = hashingProcessing(checkSumPaddingMessage,MD_Digest);  
   renderHTMLOutput("ASCIIHashedOutput",MD_Digest);
   MD_Digest = decodeAsciiDecimalToArray(MD_Digest);
 
